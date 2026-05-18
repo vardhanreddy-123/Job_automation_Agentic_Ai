@@ -1,9 +1,14 @@
-from playwright.sync_api import sync_playwright
+"""Module for scraping job postings from Lever."""
+
+# pylint: disable=duplicate-code
+
 import json
+
+from playwright.sync_api import sync_playwright
 
 
 def scrape_jobs():
-
+    """Scrapes Lever jobs and saves them to a JSON file."""
     results = []
 
     with sync_playwright() as p:
@@ -44,12 +49,12 @@ def scrape_jobs():
 
                 print(title)
 
-            except Exception as e:
+            except Exception as e:  # pylint: disable=broad-exception-caught
                 print("Error:", e)
 
         browser.close()
 
-    with open("data/jobs.json", "w") as f:
+    with open("data/jobs.json", "w", encoding="utf-8") as f:
         json.dump(results, f, indent=4)
 
     print(f"\nSaved {len(results)} jobs")
