@@ -1,0 +1,2 @@
+playwright==1.59.0
+pylint==4.0.5
